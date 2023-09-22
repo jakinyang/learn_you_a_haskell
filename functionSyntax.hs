@@ -45,11 +45,11 @@ head' :: [a] -> a
 head' [] = error "Can't call head on empty list!"
 head' (x:_) = x
 
-tell :: (Show a) => [a] -> String  
-tell [] = "The list is empty"  
-tell (x:[]) = "The list has one element: " ++ show x  
-tell (x:y:[]) = "The list has two elements: " ++ show x ++ " and " ++ show y  
-tell (x:y:_) = "This list is long. The first two elements are: " ++ show x ++ " and " ++ show y  
+tell :: (Show a) => [a] -> String
+tell [] = "The list is empty"
+tell (x:[]) = "The list has one element: " ++ show x
+tell (x:y:[]) = "The list has two elements: " ++ show x ++ " and " ++ show y
+tell (x:y:_) = "This list is long. The first two elements are: " ++ show x ++ " and " ++ show y
 
 length' :: (Num b) => [a] -> b
 length' [] = 0
@@ -62,3 +62,31 @@ sum' (x:xs) = x + sum' xs
 capital :: String -> String
 capital "" = "Empty String???"
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+
+bmiTell :: (RealFloat a) => a -> a -> String
+bmiTell weight height
+    | bmi <= skinny = "You're underweight"
+    | bmi <= normal = "You're in the center margin of weight"
+    | bmi <= fat    = "You're overweight"
+    | otherwise     = "You're very overweight"
+    where   bmi = weight / height ^ 2
+            (skinny, normal, fat)  = (18.5, 25.0, 30.0)
+
+max' :: (Ord a) => a -> a-> a
+max' a b
+    | a > b     = a
+    | otherwise = b
+
+myCompare :: (Ord a) => a -> a -> Ordering
+a `myCompare` b
+    | a > b     = GT
+    | a == b    = EQ
+    | otherwise = LT
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
+    where   (f:_, l:_) = (firstname, lastname)
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight * height ^ 2
