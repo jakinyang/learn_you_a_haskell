@@ -1,9 +1,12 @@
 getFizzBuzzOutput :: Int -> String
 getFizzBuzzOutput x
-    | x `mod` 3 == 0 && x `mod` 5 == 0 = "FizzBuzz"
-    | x `mod` 3 == 0 = "Fizz"
-    | x `mod` 5 == 0 = "Buzz"
+    | fizzbuzz = "FizzBuzz"
+    | fizz = "Fizz"
+    | buzz = "Buzz"
     | otherwise = show x
+    where fizzbuzz = x `mod` 3 == 0 && x `mod` 5 == 0
+          fizz = x `mod` 3 == 0
+          buzz = x `mod` 5 == 0 
 
 main :: IO ()
 main = do
